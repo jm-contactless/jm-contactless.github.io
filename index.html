@@ -1,2 +1,9 @@
 <h1>Est-ce que le shuttle est disponible ? / Ist der Navette aufmerksam ?</h1>
-<p>Non / Nein</p>
+<p id="shuttle" >Chargement... / Wachrtung...</p>
+<script>
+  const monParagraphe = document.getElementById('shuttle');
+
+  setTimeout(function() {
+    monParagraphe.textContent = 'Non / Nein';
+  }, 5000);
+</script>
