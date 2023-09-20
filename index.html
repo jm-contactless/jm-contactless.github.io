@@ -1,9 +1,42 @@
 <h1>Est-ce que le shuttle est disponible ? / Ist der Navette aufmerksam ?</h1>
-<p id="shuttle" >Chargement... / Wachrtung...</p>
+<p>Votre course est-elle vraiment urgente ?</p>
+<button id="ouiButton">Oui</button>
+<button id="nonButton">Non</button>
+<p style="visibility: hidden" id="shuttle" >Chargement / Wachrtung</p>
 <script>
-  const monParagraphe = document.getElementById('shuttle');
+	const monParagraphe = document.getElementById('shuttle');
+	const ouiButton = document.getElementById('ouiButton');
+	const nonButton = document.getElementById('nonButton');
+	let timeoutID;
 
-  setTimeout(function() {
-    monParagraphe.textContent = 'Non / Nein';
-  }, 5000);
+	// Fonction pour changer le texte après 5 secondes
+	function changerTexte() {
+		monParagraphe.innerHTML = 'Demande acceptée : \t <b>Non / Nein</b>';
+	}
+	
+	let i = 0;
+	function load(){
+		if(i++ === 20)
+			return changerTexte();
+		let dots = '<b>';
+		for(let j = 0; j < i % 6; j++)
+			dots += '⦿';
+		dots += '</b>';
+		monParagraphe.innerHTML = 'Chargement / Wachrtung <br />' + dots;
+		timeoutID = setTimeout(load, 300);
+	}
+
+	// Ajouter un gestionnaire d'événement pour le bouton "Oui"
+	ouiButton.addEventListener('click', function() {
+		clearTimeout(timeoutID); // Annuler le précédent timeout (s'il existe)
+		monParagraphe.style.visibility = 'visible';
+		timeoutID = setTimeout(load, 300);
+	});
+
+	// Ajouter un gestionnaire d'événement pour le bouton "Non"
+	nonButton.addEventListener('click', function() {
+		clearTimeout(timeoutID); // Annuler le précédent timeout (s'il existe)
+		monParagraphe.style.visibility = 'visible';
+		timeoutID = setTimeout(load, 300);
+	});
 </script>
