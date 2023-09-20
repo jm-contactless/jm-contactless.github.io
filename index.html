@@ -16,7 +16,7 @@
 	
 	let i = 0;
 	function load(){
-		if(i++ === 20)
+		if(i++ >= 20)
 			return changerTexte();
 		let dots = '<b>';
 		for(let j = 0; j < i % 6; j++)
@@ -28,6 +28,7 @@
 
 	// Ajouter un gestionnaire d'événement pour le bouton "Oui"
 	ouiButton.addEventListener('click', function() {
+		i = 0;
 		clearTimeout(timeoutID); // Annuler le précédent timeout (s'il existe)
 		monParagraphe.style.visibility = 'visible';
 		timeoutID = setTimeout(load, 300);
@@ -35,6 +36,7 @@
 
 	// Ajouter un gestionnaire d'événement pour le bouton "Non"
 	nonButton.addEventListener('click', function() {
+		i = 0;
 		clearTimeout(timeoutID); // Annuler le précédent timeout (s'il existe)
 		monParagraphe.style.visibility = 'visible';
 		timeoutID = setTimeout(load, 300);
