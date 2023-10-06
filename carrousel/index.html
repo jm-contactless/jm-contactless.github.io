@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Mobile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .carousel {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-content {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            max-width: 100%;
+			max-height: 50rem;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+			width: auto;
+            display: block;
+        }
+
+        .carousel-controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .carousel-button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-controls">
+        <button class="carousel-button" id="prevButton">&#9664; Précédent</button>
+        <button class="carousel-button" id="nextButton">Suivant &#9654;</button>
+    </div>
+
+    <div class="carousel">
+        <div class="carousel-content">
+            <div class="carousel-slide">
+                <img src="image1.jpg">
+            </div>
+            <div class="carousel-slide">
+                <img src="image2.jpg">
+            </div>
+            <div class="carousel-slide">
+                <img src="image3.jpg">
+            </div>
+            <div class="carousel-slide">
+                <img src="image4.jpg">
+            </div>
+            <div class="carousel-slide">
+                <img src="image5.jpg">
+            </div>
+            <div class="carousel-slide">
+                <img src="image6.jpg">
+            </div>
+            <div class="carousel-slide">
+                <img src="image7.jpg">
+            </div>
+            <!-- Ajoutez autant de diapositives que nécessaire -->
+        </div>
+    </div>
+    <script>
+        const carouselContent = document.querySelector('.carousel-content');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+		const count = carouselContent.childElementCount;
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(${-100 * index}%)`;
+            });
+        }
+
+        function goToPrevSlide() {
+            currentIndex = (currentIndex - 1 + count) % count;
+            showSlide(currentIndex);
+        }
+
+        function goToNextSlide() {
+            currentIndex = (currentIndex + 1) % count;
+            showSlide(currentIndex);
+        }
+
+        prevButton.addEventListener('click', goToPrevSlide);
+        nextButton.addEventListener('click', goToNextSlide);
+
+        showSlide(currentIndex);
+    </script>
+</body>
+</html>
